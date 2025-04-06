@@ -20,8 +20,10 @@ public class HistoricalRecord {
     private LocalDate endDate;
 
     @ManyToOne
-    Professor professor;
+    @JoinColumn(name = "professorid")
+    private Professor professor;
 
     @ManyToOne
-    Role role;
+    @JoinColumn(name = "rolId")
+    private Role objRole;
 }

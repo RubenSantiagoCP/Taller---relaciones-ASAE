@@ -12,23 +12,23 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "proffesor_name")
+    @Column(name = "proffesor_name", length = 100)
     private String name;
 
-    @Column(name = "proffesor_last_name")
+    @Column(name = "proffesor_last_name", length = 100)
     private String lastName;
 
-    @Column(name = "proffesor_grouo_name")
+    @Column(name = "proffesor_grouo_name", length = 100)
     private String groupName;
 
 
-    @Column(name = "proffesor_email")
+    @Column(name = "proffesor_email", unique = true, length = 100)
     private String email;
 
     @OneToMany
     private List<HistoricalRecord> historicalRecord;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor", cascade = {CascadeType.REMOVE})
     private List<AFormat> aFormat;
 
 }

@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PPAFormat extends AFormat {
 
     @Column(name = "assesor_name")

@@ -33,4 +33,8 @@ public class Observation {
             joinColumns = @JoinColumn(name = "observation_id"),
             inverseJoinColumns = @JoinColumn(name = "proffesor_id"))
     private List<Professor> proffesors;
+
+    @ManyToOne
+    @JoinColumn(name = "evaluation_id")
+    private Evaluation objEvaluation;
 }

@@ -1,5 +1,7 @@
 package com.edu.unicauca.asae.formatoa_relaciones.models;
 
+import java.util.List;
+
 import com.edu.unicauca.asae.formatoa_relaciones.enums.RoleEnum;
 import jakarta.persistence.*;
 
@@ -12,4 +14,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     private RoleEnum assignedRole;
+
+    @OneToMany(mappedBy = "objRole")
+    private List<HistoricalRecord> historicalRecords;
 }

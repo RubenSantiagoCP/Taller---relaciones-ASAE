@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="evaluations")
@@ -30,7 +31,14 @@ public class Evaluation {
     @Column(name= "date_register_concept")
     private LocalDate dateRegisterConcept;
 
-    @Column(name= "coordinator_name")
+    @Column(name= "coordinator_name", length = 100)
     private String coordinatorName;
+
+    @ManyToOne
+    @JoinColumn(name = "formatAId", nullable = false)
+    private AFormat objAFormat;
+
+    @OneToMany(mappedBy = "objEvaluation")
+    private List<Observation> observations;
 
 }
