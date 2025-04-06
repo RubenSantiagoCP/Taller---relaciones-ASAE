@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,21 +26,21 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stateId;
 
-    @Column(name = "actual_state")
+    @Column(name = "actual_state", nullable = false)
     @Enumerated(EnumType.STRING)
     private StateEnum actualState;
 
-    @Column(name = "register_state_date")
+    @Column(name = "register_state_date", nullable = false)
     private LocalDate registerStateDate;
 
     @OneToOne
-    @JoinColumn(name = "formatAId", unique = true)
+    @JoinColumn(name = "formatAId", unique = true, nullable = false)
     private AFormat objAformat;
 }

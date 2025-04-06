@@ -3,6 +3,7 @@ package com.edu.unicauca.asae.formatoa_relaciones.models;
 import com.edu.unicauca.asae.formatoa_relaciones.enums.ConceptEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,22 +17,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 
 public class Evaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "evaluation_id")
-    private Long id;
+    private Long evaluationId;
 
-    @Column(name = "concept")
+    @Column(name = "concept", nullable = false)
     @Enumerated(EnumType.STRING)
     private ConceptEnum concept;
 
-    @Column(name= "date_register_concept")
+    @Column(name= "date_register_concept", nullable = false)
     private LocalDate dateRegisterConcept;
 
-    @Column(name= "coordinator_name", length = 100)
+    @Column(name= "coordinator_name", length = 100, nullable = false)
     private String coordinatorName;
 
     @ManyToOne

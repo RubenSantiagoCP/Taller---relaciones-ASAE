@@ -2,6 +2,7 @@ package com.edu.unicauca.asae.formatoa_relaciones.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,16 +17,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Observation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long observationId;
 
-    @Column(name = "observation")
+    @Column(name = "observation", nullable = false)
     private String observation;
 
-    @Column(name = "observation_date_register")
+    @Column(name = "observation_date_register", nullable = false)
     private LocalDate observationDateRegister;
 
     @ManyToMany
@@ -35,6 +37,6 @@ public class Observation {
     private List<Professor> proffesors;
 
     @ManyToOne
-    @JoinColumn(name = "evaluation_id")
+    @JoinColumn(name = "evaluationId", nullable = false)
     private Evaluation objEvaluation;
 }
