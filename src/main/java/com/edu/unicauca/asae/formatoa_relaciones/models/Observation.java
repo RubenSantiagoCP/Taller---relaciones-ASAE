@@ -37,6 +37,6 @@ public class Observation {
     private List<Professor> proffesors;
 
     @ManyToOne
-    @JoinColumn(name = "evaluationId", nullable = false)
+    @JoinColumn(name = "evaluationId")
     private Evaluation objEvaluation;
 }

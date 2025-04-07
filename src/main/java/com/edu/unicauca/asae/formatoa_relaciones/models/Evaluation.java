@@ -36,7 +36,7 @@ public class Evaluation {
     private String coordinatorName;
 
     @ManyToOne
-    @JoinColumn(name = "formatAId", nullable = false)
+    @JoinColumn(name = "formatAId")
     private AFormat objAFormat;
 
     @OneToMany(mappedBy = "objEvaluation")

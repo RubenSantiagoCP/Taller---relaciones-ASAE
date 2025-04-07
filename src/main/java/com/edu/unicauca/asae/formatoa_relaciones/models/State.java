@@ -41,6 +41,6 @@ public class State {
     private LocalDate registerStateDate;
 
     @OneToOne
-    @JoinColumn(name = "formatAId", unique = true, nullable = false)
+    @JoinColumn(name = "formatAId", unique = true)
     private AFormat objAformat;
 }
