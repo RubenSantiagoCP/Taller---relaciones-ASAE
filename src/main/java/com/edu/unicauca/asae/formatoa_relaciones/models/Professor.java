@@ -35,7 +35,7 @@ public class Professor {
     @Column(name = "proffesor_email", unique = true, length = 100, nullable = false)
     private String email;
 
-    @OneToMany
+    @OneToMany(mappedBy = "professor")
     private List<HistoricalRecord> historicalRecord;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor", cascade = {CascadeType.REMOVE})

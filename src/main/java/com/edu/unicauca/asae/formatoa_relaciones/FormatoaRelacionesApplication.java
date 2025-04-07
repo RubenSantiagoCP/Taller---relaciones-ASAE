@@ -48,6 +48,8 @@ public class FormatoaRelacionesApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		aFormatRepository.deleteAll();
+		professorRepository.deleteAll();
 		createtTIAFormat();
 		createPPAFormat();
 
