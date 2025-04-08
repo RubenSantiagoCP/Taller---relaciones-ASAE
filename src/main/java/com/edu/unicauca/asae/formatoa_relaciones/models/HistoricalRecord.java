@@ -1,11 +1,22 @@
 package com.edu.unicauca.asae.formatoa_relaciones.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "historical_records")
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class HistoricalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
