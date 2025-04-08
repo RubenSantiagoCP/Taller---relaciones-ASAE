@@ -1,11 +1,7 @@
 package com.edu.unicauca.asae.formatoa_relaciones.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"objEvaluation", "proffesors"})
 public class Observation {
 
     @Id
@@ -30,13 +27,13 @@ public class Observation {
     @Column(name = "observation_date_register", nullable = false)
     private LocalDate observationDateRegister;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "proffesor_observation",
             joinColumns = @JoinColumn(name = "observation_id"),
             inverseJoinColumns = @JoinColumn(name = "proffesor_id"))
     private List<Professor> proffesors;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "evaluationId",nullable = false)
     private Evaluation objEvaluation;
 }

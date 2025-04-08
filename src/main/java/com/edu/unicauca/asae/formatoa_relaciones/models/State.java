@@ -4,16 +4,7 @@ import java.time.LocalDate;
 
 import com.edu.unicauca.asae.formatoa_relaciones.enums.StateEnum;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,7 +31,7 @@ public class State {
     @Column(name = "register_state_date", nullable = false)
     private LocalDate registerStateDate;
 
-    @OneToOne
-    @JoinColumn(name = "formatAId", unique = true,nullable = false)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "formatAId", unique = true)
     private AFormat objAformat;
 }

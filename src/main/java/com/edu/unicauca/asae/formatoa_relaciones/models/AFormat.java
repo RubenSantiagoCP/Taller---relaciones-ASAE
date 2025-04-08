@@ -3,10 +3,7 @@ package com.edu.unicauca.asae.formatoa_relaciones.models;
 import java.util.List;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -14,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @SuperBuilder
+@ToString(exclude={"generalObjective","specificObjective"})
 public class AFormat {
 
     @Id
@@ -36,7 +34,7 @@ public class AFormat {
     @OneToOne(mappedBy = "objAformat", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private State state;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = {CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAFormat", cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     private List<Evaluation> evaluations;
 
 }

@@ -2,11 +2,7 @@ package com.edu.unicauca.asae.formatoa_relaciones.models;
 
 import com.edu.unicauca.asae.formatoa_relaciones.enums.ConceptEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
+@ToString(exclude = {"objAFormat", "observations"})
 public class Evaluation {
 
     @Id
