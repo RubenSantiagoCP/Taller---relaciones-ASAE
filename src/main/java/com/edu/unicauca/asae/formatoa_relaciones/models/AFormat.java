@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @SuperBuilder
-@ToString(exclude={"generalObjective","specificObjective"})
+@ToString(exclude={"generalObjective","specificObjective","objProfessor","state","evaluations"})
 public class AFormat {
 
     @Id
@@ -34,7 +34,7 @@ public class AFormat {
     @OneToOne(mappedBy = "objAformat", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private State state;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAFormat", cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     private List<Evaluation> evaluations;
 
 }

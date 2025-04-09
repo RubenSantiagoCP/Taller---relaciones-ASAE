@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"objAFormat", "observations"})
 public class Evaluation {
 
     @Id

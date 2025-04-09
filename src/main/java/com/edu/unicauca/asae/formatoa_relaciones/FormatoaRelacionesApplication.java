@@ -63,6 +63,7 @@ public class FormatoaRelacionesApplication implements CommandLineRunner {
         createAFormat();
         createObservation();
         getCommitteeMembers();
+        getAFormatsByProfessor();
 
     }
 
@@ -92,7 +93,7 @@ public class FormatoaRelacionesApplication implements CommandLineRunner {
                 .objProfessor(savedProfessor)
                 .state(savedState)
                 .build();
-
+        savedProfessor.setAFormat(List.of(objTIAFormat));
         this.aFormatRepository.save(objTIAFormat);
 
         // Case 2: The director already exists, it cannot be created, it is only
@@ -135,6 +136,7 @@ public class FormatoaRelacionesApplication implements CommandLineRunner {
                         .coordinatorName("Nombre del coordinador")
                         .objAFormat(objTIAFormat.get())
                         .build();
+                evaluation.setObjAFormat(objTIAFormat.get());
                 evaluation = this.evaluationRepository.save(evaluation);
 
             } else {
@@ -156,6 +158,7 @@ public class FormatoaRelacionesApplication implements CommandLineRunner {
                     .objEvaluation(evaluation)
                     .proffesors(lstProfessors)
                     .build();
+            evaluation.setObservations(List.of(objObservation));
 
             this.observationRepository.save(objObservation);
 
@@ -165,20 +168,56 @@ public class FormatoaRelacionesApplication implements CommandLineRunner {
 
     @Transactional(readOnly = true)
     public void getAFormatsByProfessor() {
-        System.out.println("Formatos Asignados al profesor con id 1");
-        List<AFormat> lstAFormats = this.aFormatRepository.findAllByObjProfessor_Id(1L);
+        System.out.println("5. Consultar formatos A por docente");
+        Professor proffesor = this.professorRepository.findById(6L).orElseThrow();
+        System.out.println("Nombre del docente: " + proffesor.getName());
+        System.out.println("Apellido del docente: "+proffesor.getLastName());
 
-        for (AFormat objAFormat : lstAFormats) {
-            System.out.println("Docente: " + objAFormat.getObjProfessor().getName());
+        List<AFormat> formats = proffesor.getAFormat();
+        if (formats == null || formats.isEmpty()) {
+            System.out.println("No hay formatos A para este docente");
+            return;
+        }
+        System.out.println("===== FORMATOS A =====");
+
+        for(AFormat objAFormat: proffesor.getAFormat()) {
+            System.out.println("----Titulo del formato: " + objAFormat.getTitle()+"----");
+            System.out.println("Docente: "+objAFormat.getObjProfessor().getName());
             System.out.println("---- Evaluaciones ----");
-            for (Evaluation objEvaluation : objAFormat.getEvaluations()) {
+            //assert objAFormat.getEvaluations() != null;
+            if (CollectionHelper.isEmpty(objAFormat.getEvaluations())) {
+                System.out.println("No hay evaluaciones para este formato");
+                continue;
+            }
+            for (Evaluation objEvaluation: objAFormat.getEvaluations()) {
                 System.out.println("Evaluación: " + objEvaluation);
-                System.out.println("---- Observaciones ----");
-                for (Observation objObservation : objEvaluation.getObservations()) {
+                System.out.println("Concepto: " + objEvaluation.getConcept());
+                System.out.println("Fecha de registro: " + objEvaluation.getDateRegisterConcept());
+                System.out.println("Nombre del coordinador: " + objEvaluation.getCoordinatorName());
+                List<Observation> lstObservations = objEvaluation.getObservations();
+                if (CollectionHelper.isEmpty(lstObservations)) {
+                    System.out.println("No hay observaciones para esta evaluación");
+                    continue;
+                }
+                for (Observation objObservation : lstObservations) {
                     System.out.println("Observación: " + objObservation);
+                    System.out.println("Fecha de registro de la observación: " + objObservation.getObservationDateRegister());
                 }
             }
         }
+
+        /*for (AFormat objAFormat : proffesor.getAFormat()) {
+            System.out.println("===== Titulo del formato: " + objAFormat.getTitle()+" =====");
+            System.out.println("Docente: "+objAFormat.getObjProfessor().getName());
+            System.out.println("---- Evaluaciones ----");
+            //assert objAFormat.getEvaluations() != null;
+            if (CollectionHelper.isEmpty(objAFormat.getEvaluations())) {
+                System.out.println("No hay evaluaciones para este formato");
+                continue;
+            }
+
+
+        }*/
     }
 
     @Transactional(readOnly = true)
