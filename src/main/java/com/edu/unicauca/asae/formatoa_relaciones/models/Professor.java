@@ -39,6 +39,6 @@ public class Professor {
     private List<HistoricalRecord> historicalRecord;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor", cascade = {CascadeType.REMOVE})
-    private List<AFormat> aFormat;
+    private List<AFormat> aFormats;
 
 }
